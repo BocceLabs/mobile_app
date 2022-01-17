@@ -312,16 +312,5 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 16,
     marginHorizontal: 12,
-  },
-  headerStyle: {
-    flex: 1,
-    height: 40,
-    width: '100%',
-    backgroundColor: 'blue',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  titleStyle: {
-    color: 'white',
-  },
+  }
 });

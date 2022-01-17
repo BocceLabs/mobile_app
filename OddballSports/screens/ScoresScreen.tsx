@@ -21,6 +21,20 @@ export default function GamesScreen() {
   // state vars
   const [colorA, setColorA] = useState("blue");
   const [colorB, setColorB] = useState("red");
+  const [scoreA, setScoreA] = useState(0);
+  const [scoreB, setScoreB] = useState(0);
+
+  // score inc/dec-rementers
+  const changeScoreA = async (value) => {
+    if (scoreA + value >= 0) {
+      setScoreA(scoreA + value)
+    };
+  };
+  const changeScoreB = async (value) => {
+    if (scoreB + value >= 0) {
+      setScoreB(scoreB + value)
+    };
+  };
 
   // dropdown
   const colors = ["black", "blue", "green", "orange", "pink", "red"];
@@ -42,11 +56,19 @@ export default function GamesScreen() {
                         setColorA(selectedItem);
                       }}
                   />
-                  <Icon style={styles.icon} color={colorA} name={"caret-up-circle"}/>
+                  <Icon style={styles.icon}
+                        color={colorA}
+                        name={"caret-up-circle"}
+                        onPress={() => changeScoreA(1)}
+                  />
                   <View backgroundColor={colorA}>
-                    <Text style={styles.score}>00</Text>
+                    <Text style={styles.score}>{scoreA}</Text>
                   </View>
-                  <Icon style={styles.icon} color={colorA} name={"caret-down-circle"}/>
+                  <Icon style={styles.icon}
+                        color={colorA}
+                        name={"caret-down-circle"}
+                        onPress={() => changeScoreA(-1)}
+                  />
                 </Col>
                 <Col>
                   <SelectDropdown
@@ -55,11 +77,19 @@ export default function GamesScreen() {
                         setColorB(selectedItem);
                       }}
                   />
-                  <Icon style={styles.icon} color={colorB} name={"caret-up-circle"}/>
+                  <Icon style={styles.icon}
+                        color={colorB}
+                        name={"caret-up-circle"}
+                        onPress={() => changeScoreB(1)}
+                  />
                   <View backgroundColor={colorB}>
-                    <Text style={styles.score}>00</Text>
+                    <Text style={styles.score}>{scoreB}</Text>
                   </View>
-                  <Icon style={styles.icon} color={colorB} name={"caret-down-circle"}/>
+                  <Icon style={styles.icon}
+                        color={colorB}
+                        name={"caret-down-circle"}
+                        onPress={() => changeScoreB(-1)}
+                  />
                 </Col>
               </Row>
               <Col>
