@@ -128,6 +128,7 @@ export default function GamesScreen({ navigation }: RootTabScreenProps<'TabOne'>
   const setGame = async (gameId) => {
     setSelectedId(gameId);
     navigation.navigate("Modal", {
+      gameId: gameId,
       game: data[gameId],
     });
   };

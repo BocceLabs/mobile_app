@@ -16,10 +16,29 @@ export default function ModalScreen( {route, navigation} ) {
   // fonts
   let [fontsLoaded] = useFonts({
     Orbitron_400Regular,
+    'LuckiestGuy-Regular': require('../assets/fonts/LuckiestGuy-Regular.ttf'),
   });
 
+  const setGameValue = async (gameId, data) => {
+    try {
+      const response = await fetch(url + 'game/set_value/' + gameId, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Api-Key': process.env.ABC_SCOREBOARD_KEY,
+        },
+        body: JSON.stringify(data),
+      });
+      const json = await response.json();
+    } catch (error) {
+      console.error('Error: ', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   // params from the previous screen
-  const { game } = route.params;
+  const { gameId, game } = route.params;
 
   // state vars
   const [gameData, setGameData] = useState(game);
@@ -30,24 +49,30 @@ export default function ModalScreen( {route, navigation} ) {
   const [isLoading, setLoading] = useState(false);
 
   // score inc/dec-rementers
-  const changeScoreA = async (value) => {
-    if (scoreA + value >= 0) {
-      setScoreA(scoreA + value)
+  const changeScoreA = async (gameId, value) => {
+    let score = scoreA + value;
+    if (score >= 0) {
+      setScoreA(score);
+      setGameValue(gameId, {"team_a_score": score});
     };
   };
-  const changeScoreB = async (value) => {
-    if (scoreB + value >= 0) {
-      setScoreB(scoreB + value)
+  const changeScoreB = async (gameId, value) => {
+    let score = scoreB + value;
+    if (score >= 0) {
+      setScoreB(score);
+      setGameValue(gameId, {"team_b_score": score});
     };
   };
 
   // set the color
   const colors = ["black", "blue", "green", "orange", "pink", "red"];
-  const changeColorA = async (value) => {
-    setColorA(value)
+  const changeColorA = async (gameId, value) => {
+    setColorA(value);
+    setGameValue(gameId, {"team_a_ball_color_pattern": value});
   }
-  const changeColorB = async (value) => {
-    setColorB(value)
+  const changeColorB = async (gameId, value) => {
+    setColorB(value);
+    setGameValue(gameId, {"team_b_ball_color_pattern": value});
   }
 
 
@@ -65,14 +90,14 @@ export default function ModalScreen( {route, navigation} ) {
                   <SelectDropdown
                       data={colors}
                       onSelect={(selectedItem, index) => {
-                        changeColorA(selectedItem);
+                        changeColorA(gameId, selectedItem);
                       }}
                   />
                   <Text style={styles.teamName}>{gameData["team_a"]}</Text>
                   <Icon style={styles.icon}
                         color={colorA}
                         name={"caret-up-circle"}
-                        onPress={() => changeScoreA(1)}
+                        onPress={() => changeScoreA(gameId,1)}
                   />
                   <View backgroundColor={colorA}>
                     <Text style={styles.score}>{scoreA}</Text>
@@ -80,21 +105,21 @@ export default function ModalScreen( {route, navigation} ) {
                   <Icon style={styles.icon}
                         color={colorA}
                         name={"caret-down-circle"}
-                        onPress={() => changeScoreA(-1)}
+                        onPress={() => changeScoreA(gameId,-1)}
                   />
                 </Col>
                 <Col>
                   <SelectDropdown
                       data={colors}
                       onSelect={(selectedItem, index) => {
-                        changeColorB(selectedItem);
+                        changeColorB(gameId, selectedItem);
                       }}
                   />
                   <Text style={styles.teamName}>{gameData["team_b"]}</Text>
                   <Icon style={styles.icon}
                         color={colorB}
                         name={"caret-up-circle"}
-                        onPress={() => changeScoreB(1)}
+                        onPress={() => changeScoreB(gameId,1)}
                   />
                   <View backgroundColor={colorB}>
                     <Text style={styles.score}>{scoreB}</Text>
@@ -102,34 +127,34 @@ export default function ModalScreen( {route, navigation} ) {
                   <Icon style={styles.icon}
                         color={colorB}
                         name={"caret-down-circle"}
-                        onPress={() => changeScoreB(-1)}
+                        onPress={() => changeScoreB(gameId,-1)}
                   />
                 </Col>
               </Row>
-              <Col>
-                <Row>
-                  <Col>
-                    <Text style={styles.timer}>00:00</Text>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col>
-                    <Icon style={styles.icon} name={"play"}/>
-                  </Col>
-                  <Col>
-                    <Icon style={styles.icon} name={"pause"}/>
-                  </Col>
-                  <Col>
-                    <Icon style={styles.icon} name={"stop"}/>
-                  </Col>
-                </Row>
-              </Col>
             </Col>
           </Grid>
         </View>
     );
   }
 }
+/**
+<Row>
+  <Col>
+    <Text style={styles.timer}>00:00</Text>
+  </Col>
+</Row>
+<Row>
+  <Col>
+    <Icon style={styles.icon} name={"play"}/>
+  </Col>
+  <Col>
+    <Icon style={styles.icon} name={"pause"}/>
+  </Col>
+  <Col>
+    <Icon style={styles.icon} name={"stop"}/>
+  </Col>
+</Row>
+*/
 
 const styles = StyleSheet.create({
   container: {
@@ -153,7 +178,6 @@ const styles = StyleSheet.create({
     marginVertical: 30,
   },
   teamName: {
-    textAlignVertical: "center",
     textAlign: "center",
     fontSize: 20,
     marginVertical: 30,
