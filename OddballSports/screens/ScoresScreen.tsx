@@ -17,7 +17,7 @@ export default function GamesScreen() {
   const [colorB, setColorB] = useState("red");
 
   // dropdown
-  const colors = ["black", "blue", "green", "orange", "pink", "red", "yellow"];
+  const colors = ["black", "blue", "green", "orange", "pink", "red"];
 
   return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     color: "white",
     justifyContent: "center",
     textAlignVertical: "center",
-    marginTop: 10,
+    marginTop: 12,
   },
   col: {
 

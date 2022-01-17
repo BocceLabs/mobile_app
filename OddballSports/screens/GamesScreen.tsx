@@ -209,7 +209,7 @@ export default function GamesScreen({ navigation }: RootTabScreenProps<'TabOne'>
               iconText={courtIconText}
               leaguesWithLogos={courtsWithLogos} />
           {isLoading ? <ActivityIndicator/> : (
-              <SafeAreaView style={styles.container}>
+              <SafeAreaView style={{flex: 1}}>
                 <ScrollView
                   contentContainerStyle={styles.scrollView}
                   refreshControl={
