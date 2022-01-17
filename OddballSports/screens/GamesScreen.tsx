@@ -130,7 +130,7 @@ export default function GamesScreen({ navigation }: RootTabScreenProps<'TabOne'>
     wait(2000).then(() => setRefreshing(false));
   }, []);
 
-  const renderItem = ({ item }) => {
+  const renderItem = ({ item, index }) => {
     const backgroundColor = item.id === selectedId ? "#db89ba" : "#f9c2ff";
     const color = item.id === selectedId ? 'white' : 'black';
 
@@ -210,22 +210,15 @@ export default function GamesScreen({ navigation }: RootTabScreenProps<'TabOne'>
               leaguesWithLogos={courtsWithLogos} />
           {isLoading ? <ActivityIndicator/> : (
               <SafeAreaView style={{flex: 1}}>
-                <ScrollView
-                  contentContainerStyle={styles.scrollView}
-                  refreshControl={
-                    <RefreshControl
-                        refreshing={refreshing}
-                        onRefresh={onRefresh}
-                    />
-                  }
-                  >
-                    <FlatList
-                        data={games}
-                        keyExtractor={(item) => item.id}
-                        renderItem={renderItem}
-                        extraData={selectedId}
-                    />
-                </ScrollView>
+                <FlatList
+                    ListHeaderComponent={
+                      <>
+                        <Text>Results:</Text>
+                      </>}
+                    data={games}
+                    keyExtractor={(item) => item.id}
+                    renderItem={renderItem}
+                    extraData={selectedId}/>
               </SafeAreaView>
           )}
         </View>
@@ -319,5 +312,16 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 16,
     marginHorizontal: 12,
+  },
+  headerStyle: {
+    flex: 1,
+    height: 40,
+    width: '100%',
+    backgroundColor: 'blue',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  titleStyle: {
+    color: 'white',
   },
 });
