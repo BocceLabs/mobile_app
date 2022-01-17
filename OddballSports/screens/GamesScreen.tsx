@@ -191,23 +191,23 @@ export default function GamesScreen({ navigation }: RootTabScreenProps<'TabOne'>
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
           <Text style={{ fontFamily: 'LuckiestGuy-Regular', fontSize: 40 }}>OddballSports</Text>
-          <Text style={{ fontSize: 40 }}>Games</Text>
+          <Text style={{ fontSize: 30 }}>Games</Text>
           <SelectDropdownNew
               initialValue={leagueInitialValue}
               iconText={leagueIconText}
-              leaguesWithLogos={leaguesWithLogos}>League</SelectDropdownNew>
+              leaguesWithLogos={leaguesWithLogos} />
           <SelectDropdownNew
               initialValue={seasonInitialValue}
               iconText={seasonIconText}
-              leaguesWithLogos={seasonsWithLogos}>Season</SelectDropdownNew>
+              leaguesWithLogos={seasonsWithLogos} />
           <SelectDropdownNew
               initialValue={venueInitialValue}
               iconText={venueIconText}
-              leaguesWithLogos={venuesWithLogos}>Season</SelectDropdownNew>
+              leaguesWithLogos={venuesWithLogos} />
           <SelectDropdownNew
               initialValue={courtInitialValue}
               iconText={courtIconText}
-              leaguesWithLogos={courtsWithLogos}>Court</SelectDropdownNew>
+              leaguesWithLogos={courtsWithLogos} />
           {isLoading ? <ActivityIndicator/> : (
               <SafeAreaView style={styles.container}>
                 <ScrollView
