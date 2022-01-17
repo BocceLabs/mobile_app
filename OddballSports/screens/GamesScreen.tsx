@@ -125,6 +125,13 @@ export default function GamesScreen({ navigation }: RootTabScreenProps<'TabOne'>
   ];
 
 
+  const setGame = async (gameId) => {
+    setSelectedId(gameId);
+    navigation.navigate("Modal", {
+      game: data[gameId],
+    });
+  };
+
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
     wait(2000).then(() => setRefreshing(false));
@@ -137,7 +144,7 @@ export default function GamesScreen({ navigation }: RootTabScreenProps<'TabOne'>
     return (
         <Item
             item={item}
-            onPress={() => setSelectedId(item.id)}
+            onPress={() => setGame(item.id)}
             backgroundColor={{ backgroundColor }}
             textColor={{ color }}
         />

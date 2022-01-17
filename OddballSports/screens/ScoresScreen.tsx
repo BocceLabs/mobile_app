@@ -10,7 +10,7 @@ import { useFonts, Orbitron_400Regular } from '@expo-google-fonts/orbitron';
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 
 
-const url = 'https://be-abc-scoreboard-v1-honlt6vzla-uk.a.run.app/';
+const url = process.env.ABC_SCOREBOARD_URL;
 
 export default function GamesScreen() {
   // fonts
@@ -23,6 +23,7 @@ export default function GamesScreen() {
   const [colorB, setColorB] = useState("red");
   const [scoreA, setScoreA] = useState(0);
   const [scoreB, setScoreB] = useState(0);
+  const [isLoading, setLoading] = useState(false);
 
   // score inc/dec-rementers
   const changeScoreA = async (value) => {
@@ -39,7 +40,7 @@ export default function GamesScreen() {
   // dropdown
   const colors = ["black", "blue", "green", "orange", "pink", "red"];
 
-  if (!fontsLoaded) {
+  if (!fontsLoaded || isLoading) {
     return <AppLoading/>;
   }  else {
     return (
