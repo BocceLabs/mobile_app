@@ -20,8 +20,10 @@ import SelectDropdown from "react-native-select-dropdown";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Constants from 'expo-constants';
+import BouncyCheckbox from "react-native-bouncy-checkbox";
 
-const url = process.env.ABC_SCOREBOARD_URL;
+const URL = process.env.ABC_SCOREBOARD_URL;
+const API_KEY = process.env.ABC_SCOREBOARD_KEY;
 
 export const Post = props => (
     <View>
@@ -89,6 +91,8 @@ export default function GamesScreen({ navigation }: RootTabScreenProps<'TabOne'>
   const [data, setData] = useState([]);
   const [selectedId, setSelectedId] = useState(null);
   const [refreshing, setRefreshing] = React.useState(false);
+  let bouncyCheckboxRef: BouncyCheckbox | null = null;
+  const [checkboxState, setCheckboxState] = React.useState(true);
 
   // dropdown filters
   const leagueIconText = "people-outline";
@@ -154,11 +158,11 @@ export default function GamesScreen({ navigation }: RootTabScreenProps<'TabOne'>
 
   const getGames = async () => {
     try {
-      const response = await fetch(url + 'game/list', {
+      const response = await fetch(URL + 'game/list', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'X-Api-Key': process.env.ABC_SCOREBOARD_KEY,
+        'X-Api-Key': API_KEY,
       }
     });
     const json = await response.json();
@@ -216,9 +220,23 @@ export default function GamesScreen({ navigation }: RootTabScreenProps<'TabOne'>
               initialValue={courtInitialValue}
               iconText={courtIconText}
               leaguesWithLogos={courtsWithLogos} />
+          <BouncyCheckbox
+              size={25}
+              fillColor="#62C5B4"
+              unfillColor="white"
+              text="In Progress Games"
+              iconStyle={{ borderColor: "black" }}
+              isChecked={true}
+              onPress={() => setCheckboxState(!checkboxState)}
+          />
           {isLoading ? <ActivityIndicator/> : (
               <SafeAreaView style={{flex: 1}}>
                 <FlatList
+                    refreshControl={
+                      <RefreshControl
+                          refreshing={refreshing}
+                          onRefresh={onRefresh}
+                      />}
                     ListHeaderComponent={
                       <>
                         <Text>Results:</Text>
@@ -226,7 +244,8 @@ export default function GamesScreen({ navigation }: RootTabScreenProps<'TabOne'>
                     data={games}
                     keyExtractor={(item) => item.id}
                     renderItem={renderItem}
-                    extraData={selectedId}/>
+                    extraData={selectedId}
+                />
               </SafeAreaView>
           )}
         </View>

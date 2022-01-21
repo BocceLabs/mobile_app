@@ -1,4 +1,4 @@
-import {Image, StyleSheet} from 'react-native';
+import {Image, StyleSheet, TextInput} from 'react-native';
 
 import { Text, View } from '../components/Themed';
 import { Col, Row, Grid } from "react-native-easy-grid";
@@ -24,6 +24,8 @@ export default function GamesScreen() {
   const [scoreA, setScoreA] = useState(0);
   const [scoreB, setScoreB] = useState(0);
   const [isLoading, setLoading] = useState(false);
+  const [teamAName, onChangeTeamAName] = React.useState("");
+  const [teamBName, onChangeTeamBName] = React.useState("");
 
   // score inc/dec-rementers
   const changeScoreA = async (value) => {
@@ -57,6 +59,11 @@ export default function GamesScreen() {
                         setColorA(selectedItem);
                       }}
                   />
+                  <TextInput
+                    style={styles.textinput}
+                    onChangeText={onChangeTeamAName}
+                    value={teamAName}
+                  />
                   <Icon style={styles.icon}
                         color={colorA}
                         name={"caret-up-circle"}
@@ -77,6 +84,11 @@ export default function GamesScreen() {
                       onSelect={(selectedItem, index) => {
                         setColorB(selectedItem);
                       }}
+                  />
+                  <TextInput
+                      style={styles.textinput}
+                      onChangeText={onChangeTeamBName}
+                      value={teamBName}
                   />
                   <Icon style={styles.icon}
                         color={colorB}
@@ -156,6 +168,12 @@ const styles = StyleSheet.create({
   },
   col: {
 
+  },
+  textinput: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
   },
   timer: {
     fontFamily: 'Orbitron_400Regular',

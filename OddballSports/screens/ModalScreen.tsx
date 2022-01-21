@@ -10,7 +10,8 @@ import { useFonts, Orbitron_400Regular } from '@expo-google-fonts/orbitron';
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 
 
-const url = process.env.ABC_SCOREBOARD_URL;
+const URL = process.env.ABC_SCOREBOARD_URL;
+const API_KEY = process.env.ABC_SCOREBOARD_KEY;
 
 export default function ModalScreen( {route, navigation} ) {
   // fonts
@@ -21,12 +22,12 @@ export default function ModalScreen( {route, navigation} ) {
 
   const setGameValue = async (gameId, data) => {
     try {
-      const response = await fetch(url + 'game/set_value/' + gameId, {
+      const response = await fetch(URL + 'game/set_value/' + gameId, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-Api-Key': process.env.ABC_SCOREBOARD_KEY,
-        },
+          headers: {
+            'Content-Type': 'application/json',
+                'X-Api-Key': API_KEY,
+          },
         body: JSON.stringify(data),
       });
       const json = await response.json();
