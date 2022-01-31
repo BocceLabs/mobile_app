@@ -45,11 +45,15 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around'
   },
   frameNumber: {
-    fontSize: 15
+    fontSize: 15,
+    textAlign: 'center'
   },
   score: {
     fontWeight: 'bold',
-    fontSize: 26
+    fontSize: 26,
+    margin: 4,
+    width: 50,
+    textAlign: 'center'
   },
   classRatings: {
   }

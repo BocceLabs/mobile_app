@@ -56,7 +56,8 @@ const styles = StyleSheet.create({
   },
   throwerName: {
     fontSize: 9,
-    padding: 5
+    padding: 5,
+    textAlign: 'center'
   },
   throw: {
     flexDirection: 'column',

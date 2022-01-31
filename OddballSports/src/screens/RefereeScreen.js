@@ -1,11 +1,46 @@
 // part 1 - imports
-import React from 'react';
+import React, { useState } from 'react';
 import { Text, StyleSheet, View } from 'react-native';
 import BocceFrameTable from "../components/BocceFrameTable";
 import Score from "../components/Score";
 
 // part 2 - create a component
 const RefereeScreen = () => {
+  const [frameResults, setFrameResults] = useState([
+    {
+      id: 'f1',
+      frameNumber: 1,
+      teamAScore: null,
+      teamBScore: '3',
+      class_ratings: {
+        teamAside1player1: [-1, 1],
+        teamAside1player2: [0, 0],
+        teamBside1player1: [1, -1],
+        teamBside1player2: [2, 1],
+        teamAside2player1: [0, 1],
+        teamAside2player2: [-1, 0],
+        teamBside2player1: [0, 0],
+        teamBside2player2: [1, 0]
+      }
+    },
+    {
+      id: 'f2',
+      frameNumber: 2,
+      teamAScore: null,
+      teamBScore: 1,
+      class_ratings: {
+        teamAside1player1: [0, 0],
+        teamAside1player2: [0, 0],
+        teamBside1player1: [0, 0],
+        teamBside1player2: [0, 0],
+        teamAside2player1: [0, 0],
+        teamAside2player2: [0, 0],
+        teamBside2player1: [0, 0],
+        teamBside2player2: [0, 0]
+      }
+    }
+  ])
+
 
   const gameResults = {
     teamAName: 'The FCC',
@@ -22,43 +57,17 @@ const RefereeScreen = () => {
     teamBside2player2: 'Alicia'
   };
 
-
-  const frameResults = [
-    {
-      id: 'frame01',
-      frameNumber: 1,
-      teamAScore: null,
-      teamBScore: '3'
-    },
-    {
-      id: 'frame02',
-      frameNumber: 2,
-      teamAScore: null,
-      teamBScore: 1
-    },
-    {
-      id: 'frame03',
-      frameNumber: 3,
-      teamAScore: null,
-      teamBScore: 1
-    },
-    {
-      id: 'frame04',
-      frameNumber: 4,
-      teamAScore: 1,
-      teamBScore: null,
-    }
-  ];
-
   return (
     <View>
       <Score
         gameResults={gameResults}
         frameResults={frameResults}
+        // onFrameResultsChange={setFrameResults}
       />
       <BocceFrameTable
         gameResults={gameResults}
         frameResults={frameResults}
+        onFrameResultsChange={setFrameResults}
       />
     </View>
   );

@@ -7,7 +7,8 @@ const navigator = createStackNavigator( {
 }, {
   initialRouteName: 'Referee',
   defaultNavigationOptions: {
-    title: "OddballSports"
+    title: "OddballSports",
+    // headerTitleStyle: { fontFamily: 'LuckiestGuy_400Regular' }
   }
 });
 
