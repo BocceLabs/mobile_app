@@ -1,6 +1,21 @@
+node_modules/
+.expo/
+dist/
+npm-debug.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
 
-# Created by https://www.toptal.com/developers/gitignore/api/webstorm,reactnative,macos
-# Edit at https://www.toptal.com/developers/gitignore?templates=webstorm,reactnative,macos
+# macOS
+.DS_Store
+
+
+# Created by https://www.toptal.com/developers/gitignore/api/reactnative,macos,webstorm
+# Edit at https://www.toptal.com/developers/gitignore?templates=reactnative,macos,webstorm
 
 ### macOS ###
 # General
@@ -364,4 +379,4 @@ fabric.properties
 # https://plugins.jetbrains.com/plugin/12206-codestream
 .idea/codestream.xml
 
-# End of https://www.toptal.com/developers/gitignore/api/webstorm,reactnative,macos
+# End of https://www.toptal.com/developers/gitignore/api/reactnative,macos,webstorm
