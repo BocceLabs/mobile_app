@@ -2,6 +2,7 @@
 import React from 'react';
 import { Text, StyleSheet, View } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
+import ClassRatingIcon from './ClassRatingIcon';
 
 // part 2 - create a component
 const ThrowClassRatings = ( {frameInfo, gameInfo, team, teamColor} ) => {
@@ -25,25 +26,13 @@ const ThrowClassRatings = ( {frameInfo, gameInfo, team, teamColor} ) => {
     <View style={styles.container}>
       <View>
         <Text style={styles.throwerName}>{playerName(frameInfo, gameInfo, team, 1)}</Text>
-        <AntDesign
-          name="ellipsis1"
-          style={[styles.icon, {color: teamColor}]}
-        />
-        <AntDesign
-          name="minuscircleo"
-          style={[styles.icon, {color: teamColor}]}
-        />
+        <ClassRatingIcon teamColor={teamColor} />
+        <ClassRatingIcon teamColor={teamColor} />
       </View>
       <View>
         <Text style={styles.throwerName}>{playerName(frameInfo, gameInfo, team, 2)}</Text>
-        <AntDesign
-          name="plus"
-          style={[styles.icon, {color: teamColor}]}
-        />
-        <AntDesign
-          name="pluscircleo"
-          style={[styles.icon, {color: teamColor}]}
-        />
+        <ClassRatingIcon teamColor={teamColor} />
+        <ClassRatingIcon teamColor={teamColor} />
       </View>
     </View>
   );
@@ -64,11 +53,6 @@ const styles = StyleSheet.create({
     fontSize: 35,
     padding: 5,
     textAlign: 'center'
-  },
-  icon: {
-    fontSize: 35,
-    alignSelf: 'center',
-    padding: 7
   }
 });
 
