@@ -12,8 +12,8 @@ const Score = ( {gameResults, frameResults} ) => {
         <Text style={[styles.teamName, {color: gameResults.teamBColor}]}>Hiss of Death</Text>
       </View>
       <View style={styles.container}>
-        <Text style={[styles.score, {color: gameResults.teamAColor}]}>1</Text>
-        <Text style={[styles.score, {color: gameResults.teamBColor}]}>5</Text>
+        <Text style={[styles.score, {color: gameResults.teamAColor}]}>0</Text>
+        <Text style={[styles.score, {color: gameResults.teamBColor}]}>3</Text>
       </View>
     </>
   );

@@ -24,22 +24,6 @@ const RefereeScreen = () => {
         teamBside2player2: [1, 0]
       }
     },
-    {
-      id: 'f2',
-      frameNumber: 2,
-      teamAScore: null,
-      teamBScore: 1,
-      class_ratings: {
-        teamAside1player1: [0, 0],
-        teamAside1player2: [0, 0],
-        teamBside1player1: [0, 0],
-        teamBside1player2: [0, 0],
-        teamAside2player1: [0, 0],
-        teamAside2player2: [0, 0],
-        teamBside2player1: [0, 0],
-        teamBside2player2: [0, 0]
-      }
-    }
   ])
 
 
