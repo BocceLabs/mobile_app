@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Text, StyleSheet, View } from 'react-native';
 import BocceFrameTable from "../components/BocceFrameTable";
 import Score from "../components/Score";
-import TimerArea from "../components/TimerArea";
+import TimerScreen from "../components/TimerScreen";
 
 // part 2 - create a component
 const RefereeScreen = () => {
@@ -65,7 +65,7 @@ const RefereeScreen = () => {
         frameResults={frameResults}
         // onFrameResultsChange={setFrameResults}
       />
-      <TimerArea />
+      <TimerScreen />
       <BocceFrameTable
         gameResults={gameResults}
         frameResults={frameResults}
