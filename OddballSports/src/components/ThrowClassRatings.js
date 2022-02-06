@@ -1,38 +1,41 @@
 // part 1 - imports
-import React from 'react';
+import React, { useState } from 'react';
 import { Text, StyleSheet, View } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import ClassRatingIcon from './ClassRatingIcon';
 
 // part 2 - create a component
-const ThrowClassRatings = ( {frameInfo, gameInfo, team, teamColor} ) => {
-
-  const isOdd = (frameNumber) => {
-    return frameNumber % 2;
-  };
-
-  const playerName = (frameInfo, gameInfo, team, player) => {
-    switch (team) {
-      case 'A':
-        return isOdd(frameInfo.frameNumber) ? (player === 1 ? gameInfo.teamAside1player1 : gameInfo.teamAside1player2): (player === 2 ? gameInfo.teamAside2player1 : gameInfo.teamAside2player2);
-      case 'B':
-        return isOdd(frameInfo.frameNumber) ? (player === 1 ? gameInfo.teamBside1player1 : gameInfo.teamBside1player2): (player === 2 ? gameInfo.teamBside2player1 : gameInfo.teamBside2player2);
-      default:
-        return '';
-    };
-  };
+const ThrowClassRatings = ( {player1Name, player2Name, team, teamColor, throwNumber, onChangeThrowNumber} ) => {
+  
+  const [rating, setRating] = useState(-2);
 
   return (
     <View style={styles.container}>
       <View>
-        <Text style={styles.throwerName}>{playerName(frameInfo, gameInfo, team, 1)}</Text>
-        <ClassRatingIcon teamColor={teamColor} />
-        <ClassRatingIcon teamColor={teamColor} />
+        <Text style={styles.throwerName}>{player1Name}</Text>
+        <ClassRatingIcon
+          color={teamColor}
+          id={'team_' + team + '_p1_throw1'}
+          onChangeRating={setRating}
+        />
+        <ClassRatingIcon
+          color={teamColor}
+          id={'team_' + team + '_p1_throw2'}
+          onChangeRating={setRating}
+        />
       </View>
       <View>
-        <Text style={styles.throwerName}>{playerName(frameInfo, gameInfo, team, 2)}</Text>
-        <ClassRatingIcon teamColor={teamColor} />
-        <ClassRatingIcon teamColor={teamColor} />
+        <Text style={styles.throwerName}>{player2Name}</Text>
+        <ClassRatingIcon
+          color={teamColor}
+          id={'team_' + team + '_p2_throw1'}
+          onChangeRating={setRating}
+        />
+        <ClassRatingIcon
+          color={teamColor}
+          id={'team_' + team + '_p2_throw2'}
+          onChangeRating={setRating}
+        />
       </View>
     </View>
   );

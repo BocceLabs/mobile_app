@@ -1,37 +1,45 @@
 // part 1 - imports
-import React from 'react';
+import React, {useState} from 'react';
 import { Text, StyleSheet, View } from 'react-native';
 import ThrowClassRatings from "./ThrowClassRatings";
 
 // part 2 - create a component
-const BocceFrameSingle = ( {frameInfo, gameInfo}) => {
+const BocceFrameSingle = ( {frameInfoSingle, onFrameResultsChange, gameInfo}) => {
+
+  // state
+  const [throwNumber, setThrowNumber] = useState(0);
 
   const isOdd = (frameNumber) => {
+    console.log(frameInfoSingle);
     return frameNumber % 2;
   };
 
   return (
     <View
       style={styles.container}
-      backgroundColor={isOdd(frameInfo.frameNumber) ? '#D9F5F7': 'white'}
+      backgroundColor={isOdd(frameInfoSingle.frame_number) ? '#D9F5F7': 'white'}
     >
-      <Text style={styles.frameNumber}>{frameInfo.frameNumber}</Text>
-      <Text style={[styles.score, {color: gameInfo.teamAColor}]}>{frameInfo.teamAScore}</Text>
+      <Text style={styles.frameNumber}>{frameInfoSingle.frame_number}</Text>
+      <Text style={[styles.score, {color: gameInfo.teams.team_a.color}]}>{frameInfoSingle.score.team_a}</Text>
       <ThrowClassRatings
         style={styles.classRatings}
-        frameInfo={frameInfo}
-        gameInfo={gameInfo}
-        team='A'
-        teamColor={gameInfo.teamAColor}
+        player1Name={gameInfo.teams.team_a.players[0]}
+        player2Name={gameInfo.teams.team_a.players[1]}
+        team="a"
+        teamColor={gameInfo.teams.team_a.color}
+        throwNumber={throwNumber}
+        onChangeThrowNumber={setThrowNumber}
       />
       <ThrowClassRatings
         style={styles.classRatings}
-        frameInfo={frameInfo}
-        gameInfo={gameInfo}
-        team='B'
-        teamColor={gameInfo.teamBColor}
+        player1Name={gameInfo.teams.team_b.players[0]}
+        player2Name={gameInfo.teams.team_b.players[1]}
+        team="b"
+        teamColor={gameInfo.teams.team_b.color}
+        throwNumber={throwNumber}
+        onChangeThrowNumber={setThrowNumber}
       />
-      <Text style={[styles.score, {color: gameInfo.teamBColor}]}>{frameInfo.teamBScore}</Text>
+      <Text style={[styles.score, {color: gameInfo.teams.team_b.color}]}>{frameInfoSingle.score.team_b}</Text>
     </View>
   );
 };
@@ -42,7 +50,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderWidth: 1,
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
+    height: 120
   },
   frameNumber: {
     fontSize: 15,

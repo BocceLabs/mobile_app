@@ -7,26 +7,27 @@ import BocceFrameSingle from "./BocceFrameSingle";
 const BocceFrameTable = ( {gameResults, frameResults, onFrameResultsChange } ) => {
 
 
+
   const onPressAddFrame = () => {
-    onFrameResultsChange( [...frameResults,
-      {
-        id: 'f' + (frameResults.length + 1).toString(),
-        frameNumber: frameResults.length + 1,
-        teamAScore: null,
-        teamBScore: null,
-        class_ratings: {
-          teamAside1player1: [0, 0],
-          teamAside1player2: [0, 0],
-          teamBside1player1: [0, 0],
-          teamBside1player2: [0, 0],
-          teamAside2player1: [0, 0],
-          teamAside2player2: [0, 0],
-          teamBside2player1: [0, 0],
-          teamBside2player2: [0, 0]
-        }
-      }]
-    )
+    frameResults['f' + (Object.keys(frameResults).length + 1).toString()] = {
+      id: 'f' + (Object.keys(frameResults).length + 1).toString(),
+      frame_number: Object.keys(frameResults).length + 1,
+      score: {
+        team_a: null,
+        team_b: null
+      },
+      the_throws: []
+    };
+    onFrameResultsChange( frameResults );
+    console.log( frameResults );
   };
+
+  const onAddThrow = (frameNumber, theThrow) => {
+    frameResults['f' + frameNumber.toString()].the_throws.push(theThrow);
+    onFrameResultsChange(frameResults );
+  }
+
+
 
   return (
     <View>
@@ -39,10 +40,13 @@ const BocceFrameTable = ( {gameResults, frameResults, onFrameResultsChange } ) =
       </TouchableOpacity>
       <FlatList
         style={styles.framesList}
-        data={frameResults}
-        keyExtractor={result => result.id}
+        data={Object.values(frameResults)}
+        keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => {
-          return <BocceFrameSingle frameInfo={item} gameInfo={gameResults} />;
+          return <BocceFrameSingle
+            frameInfoSingle={item}
+            onFrameResultsChange={onFrameResultsChange}
+            gameInfo={gameResults} />;
         }}
       />
     </View>

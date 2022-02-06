@@ -8,12 +8,12 @@ const Score = ( {gameResults, frameResults} ) => {
   return (
     <>
       <View style={styles.container}>
-        <Text style={[styles.teamName, {color: gameResults.teamAColor}]}>The FCC</Text>
-        <Text style={[styles.teamName, {color: gameResults.teamBColor}]}>Hiss of Death</Text>
+        <Text style={[styles.teamName, {color: gameResults.teams.team_a.color}]}>{gameResults.teams.team_a.name}</Text>
+        <Text style={[styles.teamName, {color: gameResults.teams.team_b.color}]}>{gameResults.teams.team_b.name}</Text>
       </View>
       <View style={styles.container}>
-        <Text style={[styles.score, {color: gameResults.teamAColor}]}>0</Text>
-        <Text style={[styles.score, {color: gameResults.teamBColor}]}>3</Text>
+        <Text style={[styles.score, {color: gameResults.teams.team_a.color}]}>{gameResults.teams.team_a.score}</Text>
+        <Text style={[styles.score, {color: gameResults.teams.team_b.color}]}>{gameResults.teams.team_a.score}</Text>
       </View>
     </>
   );

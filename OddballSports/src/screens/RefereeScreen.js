@@ -7,39 +7,46 @@ import TimerScreen from "../components/TimerScreen";
 
 // part 2 - create a component
 const RefereeScreen = () => {
-  const [frameResults, setFrameResults] = useState([
-    {
-      id: 'f1',
-      frameNumber: 1,
-      teamAScore: null,
-      teamBScore: '3',
-      class_ratings: {
-        teamAside1player1: [-1, 1],
-        teamAside1player2: [0, 0],
-        teamBside1player1: [1, -1],
-        teamBside1player2: [2, 1],
-        teamAside2player1: [0, 1],
-        teamAside2player2: [-1, 0],
-        teamBside2player1: [0, 0],
-        teamBside2player2: [1, 0]
+  const [frameResults, setFrameResults] = useState({
+      "f1": {
+        id: 'f1',
+        frame_number: 1,
+        score: {
+          team_a: null,
+          team_b: '3'
+        },
+        the_throws: []
       }
-    },
-  ])
+    }
+  )
 
 
   const gameResults = {
-    teamAName: 'The FCC',
-    teamBName: 'Hiss of Death',
-    teamAColor: 'blue',
-    teamBColor: 'magenta',
-    teamAside1player1: 'Alex',
-    teamAside1player2: 'Scott',
-    teamBside1player1: 'Elizabeth',
-    teamBside1player2: 'Lydia',
-    teamAside2player1: 'Nick',
-    teamAside2player2: 'Patric',
-    teamBside2player1: 'Libby',
-    teamBside2player2: 'Alicia'
+    id: "9423de4a-ad8f-486d-867b-c71339889474",
+    teams: {
+      team_a: {
+        name: "The FCC",
+        color: "blue",
+        score: 0,
+        players: [
+          "Alex Gara",
+          "Scott Sanville",
+          "Player 3",
+          "Nick Player"
+        ]
+      },
+      team_b: {
+        name: "Hiss of Death",
+        color: "magenta",
+        score: 0,
+        players: [
+          "Lydia Gara",
+          "Elizabeth Dias",
+          "Libby Priveti",
+          "Alicia Harvey"
+        ]
+      }
+    },
   };
 
   return (

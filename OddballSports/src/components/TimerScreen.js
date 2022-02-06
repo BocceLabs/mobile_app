@@ -21,9 +21,9 @@ const TimerScreen = _props => {
       return <View style={styles.timerInput}>
         <MaterialIcons name="timer" style={styles.iconStyle}/>
         <TextInput
+          keyboardType="number-pad"
           placeholder="MM"
           style={styles.inputStyle}
-          value={20}
           onChangeText={newTerm => submitTime(newTerm)}
           autoCapitalize='none'
           autoCorrect={false}
