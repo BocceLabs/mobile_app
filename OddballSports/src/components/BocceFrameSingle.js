@@ -23,8 +23,8 @@ const BocceFrameSingle = ( {frameInfoSingle, onFrameResultsChange, gameInfo}) =>
       <Text style={[styles.score, {color: gameInfo.teams.team_a.color}]}>{frameInfoSingle.score.team_a}</Text>
       <ThrowClassRatings
         style={styles.classRatings}
-        player1Name={gameInfo.teams.team_a.players[0]}
-        player2Name={gameInfo.teams.team_a.players[1]}
+        player1Name={gameInfo.teams.team_a.players[isOdd(frameInfoSingle.frame_number) ? 0 : 2]}
+        player2Name={gameInfo.teams.team_a.players[isOdd(frameInfoSingle.frame_number) ? 1 : 3]}
         team="a"
         teamColor={gameInfo.teams.team_a.color}
         throwNumber={throwNumber}
@@ -32,8 +32,8 @@ const BocceFrameSingle = ( {frameInfoSingle, onFrameResultsChange, gameInfo}) =>
       />
       <ThrowClassRatings
         style={styles.classRatings}
-        player1Name={gameInfo.teams.team_b.players[0]}
-        player2Name={gameInfo.teams.team_b.players[1]}
+        player1Name={gameInfo.teams.team_b.players[isOdd(frameInfoSingle.frame_number) ? 0 : 2]}
+        player2Name={gameInfo.teams.team_b.players[isOdd(frameInfoSingle.frame_number) ? 1 : 3]}
         team="b"
         teamColor={gameInfo.teams.team_b.color}
         throwNumber={throwNumber}
@@ -55,6 +55,7 @@ const styles = StyleSheet.create({
   },
   frameNumber: {
     fontSize: 15,
+    paddingLeft: 2,
     textAlign: 'center'
   },
   score: {

@@ -22,6 +22,7 @@ const TimerScreen = _props => {
         <MaterialIcons name="timer" style={styles.iconStyle}/>
         <TextInput
           keyboardType="number-pad"
+          maxLength={2}
           placeholder="MM"
           style={styles.inputStyle}
           onChangeText={newTerm => submitTime(newTerm)}
@@ -88,7 +89,7 @@ export default TimerScreen;
 const styles = StyleSheet.create({
   viewContainer: {
     height: 100,
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   // timer setting
   timerInput: {
@@ -99,7 +100,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginTop: 10,
     marginBottom: 10,
-    width: 120
+    width: 120,
+    alignSelf: 'center'
   },
   inputStyle: {
     flex: 1,

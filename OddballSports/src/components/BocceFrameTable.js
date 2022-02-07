@@ -1,30 +1,33 @@
 // part 1 - imports
-import React from 'react';
+import React, {useState} from 'react';
 import {Text, StyleSheet, View, FlatList, TouchableOpacity } from 'react-native';
 import BocceFrameSingle from "./BocceFrameSingle";
 
 // part 2 - create a component
-const BocceFrameTable = ( {gameResults, frameResults, onFrameResultsChange } ) => {
+const BocceFrameTable = ( {gameResults } ) => {
 
+  const [frameResults, setFrameResults] = useState([]);
 
 
   const onPressAddFrame = () => {
-    frameResults['f' + (Object.keys(frameResults).length + 1).toString()] = {
-      id: 'f' + (Object.keys(frameResults).length + 1).toString(),
-      frame_number: Object.keys(frameResults).length + 1,
-      score: {
-        team_a: null,
-        team_b: null
-      },
-      the_throws: []
-    };
-    onFrameResultsChange( frameResults );
-    console.log( frameResults );
+    const keyName = 'f' + (Object.keys(frameResults).length + 1).toString().padStart(3, '0');
+
+    setFrameResults( [...frameResults,  {
+        id: 'f' + (Object.keys(frameResults).length + 1).toString(),
+        frame_number: Object.keys(frameResults).length + 1,
+        score: {
+          team_a: null,
+          team_b: null
+        },
+        the_throws: []
+      }]);
+
+      console.log(frameResults);
   };
 
   const onAddThrow = (frameNumber, theThrow) => {
     frameResults['f' + frameNumber.toString()].the_throws.push(theThrow);
-    onFrameResultsChange(frameResults );
+    setFrameResults( frameResults );
   }
 
 
@@ -40,13 +43,14 @@ const BocceFrameTable = ( {gameResults, frameResults, onFrameResultsChange } ) =
       </TouchableOpacity>
       <FlatList
         style={styles.framesList}
-        data={Object.values(frameResults)}
-        keyExtractor={(item, index) => index.toString()}
+        data={frameResults}
+        keyExtractor={item => item.id}
         renderItem={({ item }) => {
           return <BocceFrameSingle
             frameInfoSingle={item}
-            onFrameResultsChange={onFrameResultsChange}
-            gameInfo={gameResults} />;
+            onFrameResultsChange={setFrameResults}
+            gameInfo={gameResults}
+          />;
         }}
       />
     </View>
