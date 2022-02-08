@@ -1,11 +1,11 @@
 // part 1 - imports
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {Text, StyleSheet, View, TouchableOpacity, TouchableOpacityComponent} from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 
 // part 2 - create a component
-const ClassRatingIcon = ( {color, id, onChangeRating} ) => {
+const ClassRatingIcon = ( {color, id, teamName, playerName, rating, onChangeRating, throwNumber, onChangeThrowNumber, theThrows, onChangeTheThrows} ) => {
 
   // ellipsis1, minus, dot, plus, pluscircleo
   const [iconName, setIconName] = useState('ellipsis1');
@@ -15,17 +15,15 @@ const ClassRatingIcon = ( {color, id, onChangeRating} ) => {
   const [iconColor, setIconColor] = useState('lightgray');
   const [changeTimeout, setChangeTimeout] = useState(false);
 
-  const options = {
-    enableVibrateFallback: true,
-    ignoreAndroidSystemSettings: false
-  };
-
-
   const changeRating = () => {
     if (unlocked) {
-      setRatingIndex(ratingIndex + 1 > 4 ? 1 : ratingIndex + 1);
+      if (ratingIndex + 1 > 4) {
+        setRatingIndex(1);
+      } else {
+        setRatingIndex(ratingIndex + 1);
+      };
       setIconName(ratings[ratingIndex]);
-      onChangeRating(ratingIndex - 2);
+
       if (!changeTimeout) {
         setChangeTimeout(true );
         setTimeout(() => {
@@ -45,11 +43,10 @@ const ClassRatingIcon = ( {color, id, onChangeRating} ) => {
     setIconName(ratings[ratingIndex]);
     Haptics.notificationAsync(Haptics.NotificationFeedbackType.Medium);
     setTimeout(() => {
-      setRatingIndex(0);
       setIconColor('lightgray');
       setIsUnlocked(false);
-    }, 6000);
-  }
+    }, 5000);
+  };
 
   return (
     <TouchableOpacity

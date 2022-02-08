@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'lightgreen'
   },
   framesList: {
-    height: 300
+    height: 500
   }
 });
 

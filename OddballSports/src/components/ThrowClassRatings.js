@@ -5,9 +5,12 @@ import { AntDesign } from '@expo/vector-icons';
 import ClassRatingIcon from './ClassRatingIcon';
 
 // part 2 - create a component
-const ThrowClassRatings = ( {player1Name, player2Name, team, teamColor, throwNumber, onChangeThrowNumber} ) => {
+const ThrowClassRatings = ( {player1Name, player2Name, team, teamName, frameNumber, teamColor, throwNumber, onChangeThrowNumber, theThrows, onChangeTheThrows} ) => {
   
-  const [rating, setRating] = useState(-2);
+  const [ratingP1t0, setRatingP1t0] = useState(-2);
+  const [ratingP1t1, setRatingP1t1] = useState(-2);
+  const [ratingP2t0, setRatingP2t0] = useState(-2);
+  const [ratingP2t1, setRatingP2t1] = useState(-2);
 
   return (
     <View style={styles.container}>
@@ -15,26 +18,54 @@ const ThrowClassRatings = ( {player1Name, player2Name, team, teamColor, throwNum
         <Text style={styles.throwerName}>{player1Name}</Text>
         <ClassRatingIcon
           color={teamColor}
-          id={'team_' + team + '_p1_throw1'}
-          onChangeRating={setRating}
+          id={'f' + frameNumber.toString() + '_t' + throwNumber.toString()}
+          teamName={teamName}
+          playerName={player1Name}
+          rating={ratingP1t0}
+          onChangeRating={setRatingP1t0}
+          throwNumber={throwNumber}
+          onChangeThrowNumber={onChangeThrowNumber}
+          theThrows={theThrows}
+          onChangeTheThrows={onChangeTheThrows}
         />
         <ClassRatingIcon
           color={teamColor}
-          id={'team_' + team + '_p1_throw2'}
-          onChangeRating={setRating}
+          id={'f' + frameNumber.toString() + '_t' + throwNumber.toString()}
+          teamName={teamName}
+          playerName={player1Name}
+          rating={ratingP1t1}
+          onChangeRating={setRatingP1t1}
+          throwNumber={throwNumber}
+          onChangeThrowNumber={onChangeThrowNumber}
+          theThrows={theThrows}
+          onChangeTheThrows={onChangeTheThrows}
         />
       </View>
       <View>
         <Text style={styles.throwerName}>{player2Name}</Text>
         <ClassRatingIcon
           color={teamColor}
-          id={'team_' + team + '_p2_throw1'}
-          onChangeRating={setRating}
+          id={'f' + frameNumber.toString() + '_t' + throwNumber.toString()}
+          teamName={teamName}
+          playerName={player2Name}
+          onChangeRating={setRatingP2t0}
+          rating={ratingP2t0}
+          throwNumber={throwNumber}
+          onChangeThrowNumber={onChangeThrowNumber}
+          theThrows={theThrows}
+          onChangeTheThrows={onChangeTheThrows}
         />
         <ClassRatingIcon
           color={teamColor}
-          id={'team_' + team + '_p2_throw2'}
-          onChangeRating={setRating}
+          id={'f' + frameNumber.toString() + '_t' + throwNumber.toString()}
+          teamName={teamName}
+          playerName={player2Name}
+          rating={ratingP2t1}
+          onChangeRating={setRatingP2t1}
+          throwNumber={throwNumber}
+          onChangeThrowNumber={onChangeThrowNumber}
+          theThrows={theThrows}
+          onChangeTheThrows={onChangeTheThrows}
         />
       </View>
     </View>
