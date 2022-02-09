@@ -4,7 +4,7 @@ import {Text, StyleSheet, View, FlatList, TouchableOpacity } from 'react-native'
 import BocceFrameSingle from "./BocceFrameSingle";
 
 // part 2 - create a component
-const BocceFrameTable = ( {gameResults } ) => {
+const BocceFrameTable = ( {gameResults, scoreA, scoreB, setScoreA, setScoreB } ) => {
 
   const [frameResults, setFrameResults] = useState([]);
 
@@ -50,6 +50,10 @@ const BocceFrameTable = ( {gameResults } ) => {
             frameInfoSingle={item}
             onFrameResultsChange={setFrameResults}
             gameInfo={gameResults}
+            scoreA={scoreA}
+            scoreB={scoreB}
+            setScoreA={setScoreA}
+            setScoreB={setScoreB}
           />;
         }}
       />

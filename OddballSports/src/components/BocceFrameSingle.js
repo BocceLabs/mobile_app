@@ -27,7 +27,6 @@ const BocceFrameSingle = ( {frameInfoSingle, onFrameResultsChange, gameInfo}) =>
     } else if (team === 'B' && frameScoreBUnlocked) {
       setFrameScoreB(frameScoreB === null || frameScoreB >= 4 ? 1 : frameScoreB + 1);
     }
-    console.log(frameScoreB);
   };
 
   const unlockFrameScore = (team) => {
@@ -54,11 +53,11 @@ const BocceFrameSingle = ( {frameInfoSingle, onFrameResultsChange, gameInfo}) =>
 
   useEffect(() => {
     frameScoreAUnlocked ? setFrameScoreAColor('gray') : frameScoreA === null ? setFrameScoreAColor('lightgray') : setFrameScoreAColor(gameInfo.teams.team_a.color)
-  }, [frameScoreA, frameScoreAUnlocked]);
+  }, [frameScoreA, frameScoreAUnlocked, gameInfo]);
 
   useEffect(() => {
     frameScoreBUnlocked ? setFrameScoreBColor('gray') : frameScoreB === null ? setFrameScoreBColor('lightgray') : setFrameScoreBColor(gameInfo.teams.team_b.color)
-  }, [frameScoreB, frameScoreBUnlocked]);
+  }, [frameScoreB, frameScoreBUnlocked, gameInfo]);
 
   return (
     <View

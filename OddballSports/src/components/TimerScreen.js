@@ -2,6 +2,7 @@ import React, {useRef, useState} from 'react';
 import {StyleSheet, Button, Text, SafeAreaView, View, TouchableOpacity, TextInput } from 'react-native';
 import {Timer, Countdown} from 'react-native-element-timer';
 import {MaterialIcons, FontAwesome} from "@expo/vector-icons";
+import * as Haptics from "expo-haptics";
 
 const TimerScreen = _props => {
   const timerRef = useRef(null);
@@ -65,16 +66,21 @@ const TimerScreen = _props => {
               setPaused(false);
               setStopped(false);
             }
+            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
           }}>
             <FontAwesome style={styles.timerIconButton} name='play' />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => {countdownRef.current.pause();}}>
+          <TouchableOpacity onLongPress={() => {
+            countdownRef.current.pause();
+            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+          }}>
             <FontAwesome style={styles.timerIconButton} name='pause' />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => {
+          <TouchableOpacity onLongPress={() => {
             countdownRef.current.stop();
             setStopped(true);
             setPaused(true);
+            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
           }}>
             <FontAwesome style={styles.timerIconButton} name='stop' />
           </TouchableOpacity>

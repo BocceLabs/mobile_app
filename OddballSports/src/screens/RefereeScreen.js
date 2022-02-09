@@ -9,7 +9,7 @@ import TimerScreen from "../components/TimerScreen";
 const RefereeScreen = () => {
 
   // game constant
-  const gameResults = {
+  const [gameResults, setGameResults] = useState({
     id: "9423de4a-ad8f-486d-867b-c71339889474",
     teams: {
       team_a: {
@@ -35,12 +35,13 @@ const RefereeScreen = () => {
         ]
       }
     },
-  };
+  });
 
   return (
     <View>
       <Score
         gameResults={gameResults}
+        onChangeGameResults={setGameResults}
       />
       <TimerScreen />
       <BocceFrameTable

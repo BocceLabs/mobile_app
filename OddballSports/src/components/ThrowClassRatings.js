@@ -1,16 +1,50 @@
 // part 1 - imports
-import React, { useState } from 'react';
+import React, { useReducer, useEffect } from 'react';
 import { Text, StyleSheet, View } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import ClassRatingIcon from './ClassRatingIcon';
 
+// reducer
+const reducer = (state, action) => {
+  // state === { p1t1: number, p1t2: number, p2t1: number, p2t2: number }
+  // action === { throwToChange: 'p1t1' || 'p1t2' || 'p2t1' || 'p2t2', amount: 1 }
+
+  let value = 0;
+
+  switch (action.throwToChange) {
+    case 'p1t1':
+      state.p1t1 + action.amount > 2 ? value = -1 : value = state.p1t1 + action.amount
+      // don't make changes directly to state
+      // rebuild the object instead
+      return { ...state, p1t1: value};
+    case 'p1t2':
+      state.p1t2 + action.amount > 2 ? value = -1 : value = state.p1t2 + action.amount
+      return { ...state, p1t2: value};
+    case 'p2t1':
+      state.p2t1 + action.amount > 2 ? value = -1 : value = state.p2t1 + action.amount
+      return { ...state, p2t1: value};
+    case 'p2t2':
+      state.p2t2 + action.amount > 2 ? value = -1 : value = state.p2t2 + action.amount
+      return { ...state, p2t2: value};
+    default:
+      return state;
+  }
+};
+
+
 // part 2 - create a component
 const ThrowClassRatings = ( {player1Name, player2Name, team, teamName, frameNumber, teamColor, throwNumber, onChangeThrowNumber, theThrows, onChangeTheThrows} ) => {
-  
-  const [ratingP1t0, setRatingP1t0] = useState(-2);
-  const [ratingP1t1, setRatingP1t1] = useState(-2);
-  const [ratingP2t0, setRatingP2t0] = useState(-2);
-  const [ratingP2t1, setRatingP2t1] = useState(-2);
+
+  // reducer state
+  const [state, dispatch] = useReducer(reducer, { p1t1: -2, p1t2: -2, p2t1: -2, p2t2: -2 });
+
+  // pull out the values from the state
+  const {p1t1, p1t2, p2t1, p2t2} = state;
+
+  useEffect(() => {
+    console.log(state);
+  }, [state]);
+
 
   return (
     <View style={styles.container}>
@@ -18,54 +52,26 @@ const ThrowClassRatings = ( {player1Name, player2Name, team, teamName, frameNumb
         <Text style={styles.throwerName}>{player1Name}</Text>
         <ClassRatingIcon
           color={teamColor}
-          id={'f' + frameNumber.toString() + '_t' + throwNumber.toString()}
-          teamName={teamName}
-          playerName={player1Name}
-          rating={ratingP1t0}
-          onChangeRating={setRatingP1t0}
-          throwNumber={throwNumber}
-          onChangeThrowNumber={onChangeThrowNumber}
-          theThrows={theThrows}
-          onChangeTheThrows={onChangeTheThrows}
+          onIncrease={() => dispatch({throwToChange: 'p1t1', amount: 1})}
+          theThrow={p1t1}
         />
         <ClassRatingIcon
           color={teamColor}
-          id={'f' + frameNumber.toString() + '_t' + throwNumber.toString()}
-          teamName={teamName}
-          playerName={player1Name}
-          rating={ratingP1t1}
-          onChangeRating={setRatingP1t1}
-          throwNumber={throwNumber}
-          onChangeThrowNumber={onChangeThrowNumber}
-          theThrows={theThrows}
-          onChangeTheThrows={onChangeTheThrows}
+          onIncrease={() => dispatch({throwToChange: 'p1t2', amount: 1})}
+          theThrow={p1t2}
         />
       </View>
       <View>
         <Text style={styles.throwerName}>{player2Name}</Text>
         <ClassRatingIcon
           color={teamColor}
-          id={'f' + frameNumber.toString() + '_t' + throwNumber.toString()}
-          teamName={teamName}
-          playerName={player2Name}
-          onChangeRating={setRatingP2t0}
-          rating={ratingP2t0}
-          throwNumber={throwNumber}
-          onChangeThrowNumber={onChangeThrowNumber}
-          theThrows={theThrows}
-          onChangeTheThrows={onChangeTheThrows}
+          onIncrease={() => dispatch({throwToChange: 'p2t1', amount: 1})}
+          theThrow={p2t1}
         />
         <ClassRatingIcon
           color={teamColor}
-          id={'f' + frameNumber.toString() + '_t' + throwNumber.toString()}
-          teamName={teamName}
-          playerName={player2Name}
-          rating={ratingP2t1}
-          onChangeRating={setRatingP2t1}
-          throwNumber={throwNumber}
-          onChangeThrowNumber={onChangeThrowNumber}
-          theThrows={theThrows}
-          onChangeTheThrows={onChangeTheThrows}
+          onIncrease={() => dispatch({throwToChange: 'p2t2', amount: 1})}
+          theThrow={p2t2}
         />
       </View>
     </View>

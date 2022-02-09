@@ -5,7 +5,7 @@ import { AntDesign } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 
 // part 2 - create a component
-const ClassRatingIcon = ( {color, id, teamName, playerName, rating, onChangeRating, throwNumber, onChangeThrowNumber, theThrows, onChangeTheThrows} ) => {
+const ClassRatingIcon = ( {color, onIncrease, theThrow} ) => {
 
   // ellipsis1, minus, dot, plus, pluscircleo
   const [iconName, setIconName] = useState('ellipsis1');
@@ -17,18 +17,11 @@ const ClassRatingIcon = ( {color, id, teamName, playerName, rating, onChangeRati
 
   const changeRating = () => {
     if (unlocked) {
-      if (ratingIndex + 1 > 4) {
-        setRatingIndex(1);
-      } else {
-        setRatingIndex(ratingIndex + 1);
-      };
-      setIconName(ratings[ratingIndex]);
-
+      onIncrease();
       if (!changeTimeout) {
         setChangeTimeout(true );
         setTimeout(() => {
           setIsUnlocked(false);
-          ratingIndex > 0 ? setIconColor(color) : setIconColor('lightgray');
           Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
         }, 5000);
       };
@@ -38,15 +31,27 @@ const ClassRatingIcon = ( {color, id, teamName, playerName, rating, onChangeRati
   const unlockRating = () => {
     setIsUnlocked(true);
     setChangeTimeout(false);
-    setIconColor('gray');
-    setRatingIndex(1);
-    setIconName(ratings[ratingIndex]);
     Haptics.notificationAsync(Haptics.NotificationFeedbackType.Medium);
     setTimeout(() => {
-      setIconColor('lightgray');
       setIsUnlocked(false);
     }, 5000);
   };
+
+  useEffect(() => {
+    setRatingIndex(theThrow + 2);
+  }, [theThrow]);
+
+  useEffect(() => {
+    setIconName(ratings[ratingIndex]);
+  }, [ratingIndex]);
+
+  useEffect( () => {
+    if (!unlocked && ratingIndex > 0) {
+      setIconColor(color);
+    } else if (unlocked) {
+      setIconColor('gray');
+    }
+  }, [unlocked, ratingIndex]);
 
   return (
     <TouchableOpacity
