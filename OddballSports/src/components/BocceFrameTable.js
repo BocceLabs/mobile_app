@@ -1,19 +1,19 @@
 // part 1 - imports
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Text, StyleSheet, View, FlatList, TouchableOpacity } from 'react-native';
 import BocceFrameSingle from "./BocceFrameSingle";
 
 // part 2 - create a component
-const BocceFrameTable = ( {gameResults, scoreA, scoreB, setScoreA, setScoreB } ) => {
+const BocceFrameTable = ( {gameResults, onChangeGameResults, frameResults, onChangeFrameResults } ) => {
 
-  const [frameResults, setFrameResults] = useState([]);
+
 
 
   const onPressAddFrame = () => {
     const keyName = 'f' + (Object.keys(frameResults).length + 1).toString().padStart(3, '0');
 
-    setFrameResults( [...frameResults,  {
-        id: 'f' + (Object.keys(frameResults).length + 1).toString(),
+    onChangeFrameResults( [...frameResults,  {
+        id: 'f' + (Object.keys(frameResults).length + 1).toString().padStart(3, '0'),
         frame_number: Object.keys(frameResults).length + 1,
         score: {
           team_a: null,
@@ -30,7 +30,9 @@ const BocceFrameTable = ( {gameResults, scoreA, scoreB, setScoreA, setScoreB } )
     setFrameResults( frameResults );
   }
 
-
+  useEffect(() => {
+    console.log(frameResults);
+  }, [frameResults]);
 
   return (
     <View>
@@ -48,12 +50,10 @@ const BocceFrameTable = ( {gameResults, scoreA, scoreB, setScoreA, setScoreB } )
         renderItem={({ item }) => {
           return <BocceFrameSingle
             frameInfoSingle={item}
-            onFrameResultsChange={setFrameResults}
-            gameInfo={gameResults}
-            scoreA={scoreA}
-            scoreB={scoreB}
-            setScoreA={setScoreA}
-            setScoreB={setScoreB}
+            onChangeFrameResults={onChangeFrameResults}
+            frameResults={frameResults}
+            gameResults={gameResults}
+            onChangeGameResults={onChangeGameResults}
           />;
         }}
       />

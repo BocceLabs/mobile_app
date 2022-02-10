@@ -1,5 +1,5 @@
 // part 1 - imports
-import React, { useReducer, useEffect } from 'react';
+import React, { useReducer, useEffect, useState } from 'react';
 import { Text, StyleSheet, View } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import ClassRatingIcon from './ClassRatingIcon';
@@ -33,7 +33,7 @@ const reducer = (state, action) => {
 
 
 // part 2 - create a component
-const ThrowClassRatings = ( {player1Name, player2Name, team, teamName, frameNumber, teamColor, throwNumber, onChangeThrowNumber, theThrows, onChangeTheThrows} ) => {
+const ThrowClassRatings = ( {player1Name, player2Name, color} ) => {
 
   // reducer state
   const [state, dispatch] = useReducer(reducer, { p1t1: -2, p1t2: -2, p2t1: -2, p2t2: -2 });
@@ -45,18 +45,17 @@ const ThrowClassRatings = ( {player1Name, player2Name, team, teamName, frameNumb
     console.log(state);
   }, [state]);
 
-
   return (
     <View style={styles.container}>
       <View>
         <Text style={styles.throwerName}>{player1Name}</Text>
         <ClassRatingIcon
-          color={teamColor}
+          color={color}
           onIncrease={() => dispatch({throwToChange: 'p1t1', amount: 1})}
           theThrow={p1t1}
         />
         <ClassRatingIcon
-          color={teamColor}
+          color={color}
           onIncrease={() => dispatch({throwToChange: 'p1t2', amount: 1})}
           theThrow={p1t2}
         />
@@ -64,12 +63,12 @@ const ThrowClassRatings = ( {player1Name, player2Name, team, teamName, frameNumb
       <View>
         <Text style={styles.throwerName}>{player2Name}</Text>
         <ClassRatingIcon
-          color={teamColor}
+          color={color}
           onIncrease={() => dispatch({throwToChange: 'p2t1', amount: 1})}
           theThrow={p2t1}
         />
         <ClassRatingIcon
-          color={teamColor}
+          color={color}
           onIncrease={() => dispatch({throwToChange: 'p2t2', amount: 1})}
           theThrow={p2t2}
         />

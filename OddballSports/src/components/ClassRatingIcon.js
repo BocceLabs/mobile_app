@@ -51,7 +51,8 @@ const ClassRatingIcon = ( {color, onIncrease, theThrow} ) => {
     } else if (unlocked) {
       setIconColor('gray');
     }
-  }, [unlocked, ratingIndex]);
+  }, [unlocked, ratingIndex, color]);
+
 
   return (
     <TouchableOpacity

@@ -4,11 +4,14 @@ import { Text, StyleSheet, View, TouchableOpacity } from 'react-native';
 import * as Haptics from "expo-haptics";
 
 // part 2 - create a component
-const Score = ( {gameResults, onChangeGameResults, scoreA, scoreB} ) => {
+const Score = ( {gameResults, onChangeGameResults, frameResults} ) => {
 
   const COLORS = ['red', 'magenta', 'blue', 'green', 'teal', 'orange', 'black'];
   const [colorIndexA, setColorIndexA] = useState(0);
   const [colorIndexB, setColorIndexB] = useState(0);
+  const [overallScoreA, setOverallScoreA] = useState(0);
+  const [overallScoreB, setOverallScoreB] = useState(0);
+
 
   const teamNamePressed = (team) => {
     if (team === 'A') {
@@ -22,6 +25,13 @@ const Score = ( {gameResults, onChangeGameResults, scoreA, scoreB} ) => {
     }
   };
 
+  useEffect(() => {
+    setOverallScoreA(frameResults.reduce((total, currentValue) => total = total + currentValue.score.team_a, 0));
+    setOverallScoreB(frameResults.reduce((total, currentValue) => total = total + currentValue.score.team_b, 0));
+    onChangeGameResults({...gameResults, teams: {...gameResults.teams, team_a: {...gameResults.teams.team_a, score: overallScoreA}}});
+    onChangeGameResults({...gameResults, teams: {...gameResults.teams, team_b: {...gameResults.teams.team_b, score: overallScoreB}}});
+  }, [frameResults]);
+
   return (
     <>
       <View style={styles.container}>
@@ -33,8 +43,8 @@ const Score = ( {gameResults, onChangeGameResults, scoreA, scoreB} ) => {
         </TouchableOpacity>
       </View>
       <View style={styles.container}>
-        <Text style={[styles.score, {color: gameResults.teams.team_a.color}]}>{gameResults.teams.team_a.score}</Text>
-        <Text style={[styles.score, {color: gameResults.teams.team_b.color}]}>{gameResults.teams.team_b.score}</Text>
+        <Text style={[styles.score, {color: gameResults.teams.team_a.color}]}>{overallScoreA}</Text>
+        <Text style={[styles.score, {color: gameResults.teams.team_b.color}]}>{overallScoreB}</Text>
       </View>
     </>
   );
