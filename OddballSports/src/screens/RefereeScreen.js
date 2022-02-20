@@ -4,6 +4,7 @@ import { Text, StyleSheet, View } from 'react-native';
 import BocceFrameTable from "../components/BocceFrameTable";
 import Score from "../components/Score";
 import TimerScreen from "../components/TimerScreen";
+import Sounds from "../components/Sounds";
 
 // part 2 - create a component
 const RefereeScreen = () => {
@@ -48,6 +49,7 @@ const RefereeScreen = () => {
         frameResults={frameResults}
       />
       <TimerScreen />
+      <Sounds />
       <BocceFrameTable
         gameResults={gameResults}
         onChangeGameResults={setGameResults}

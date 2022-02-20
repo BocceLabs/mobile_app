@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   throwerName: {
-    fontSize: 9,
+    fontSize: 12,
     padding: 5,
     textAlign: 'center'
   },
