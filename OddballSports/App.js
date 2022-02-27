@@ -4,11 +4,11 @@ import { createAppContainer, createSwitchNavigator, StackActions, NavigationActi
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createStackNavigator, HeaderBackButton } from 'react-navigation-stack';
 import HomeScreen from './src/screens/HomeScreen';
-import HomeScreenABC from "./src/screens/HomeScreenABC";
+import ABCMenuScreen from "./src/screens/ABCMenuScreen";
 import SettingsScreen from './src/screens/SettingsScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
-import RefereeScreen from "./src/screens/RefereeScreen";
-import GameScreen from "./src/screens/GameScreen";
+import RunGameScreen from "./src/screens/RunGameScreen";
+import RefereeMenuScreen from "./src/screens/RefereeMenuScreen";
 import NewGameScreen from "./src/screens/NewGameScreen";
 import FindGameScreen from "./src/screens/FindGameScreen";
 import TabBar from './src/components/TabBar';
@@ -18,7 +18,24 @@ import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
 const HomeStack = createStackNavigator(
   {
     Home: HomeScreen,
-    ABC: HomeScreenABC
+    ABCMenu: {
+      screen: ABCMenuScreen,
+      navigationOptions: ({navigation}) => ({
+        title: 'American Bocce Co'
+      }),
+    },
+    RefereeMenu: {
+      screen: RefereeMenuScreen,
+      navigationOptions: ({navigation}) => ({
+        title: 'ABC Referee'
+      }),
+    },
+    RunGame: {
+      screen: RunGameScreen,
+      navigationOptions: ({navigation}) => ({
+        title: 'Run Game'
+      }),
+    },
   },
   {
     defaultNavigationOptions: {
@@ -27,25 +44,6 @@ const HomeStack = createStackNavigator(
       },
       headerTintColor: '#fff',
       title: 'Home',
-
-    },
-  }
-);
-
-const GameStack = createStackNavigator(
-  {
-    Game: GameScreen,
-    Referee: RefereeScreen,
-    FindGame: FindGameScreen,
-    NewGame: NewGameScreen
-  },
-  {
-    defaultNavigationOptions: {
-      headerStyle: {
-        backgroundColor: '#42619b',
-      },
-      headerTintColor: '#fff',
-      title: 'Game',
 
     },
   }
@@ -106,17 +104,6 @@ const App = createBottomTabNavigator(
         tabBarIcon: (tabInfo) => {
           return (
             <AntDesign name="home" size={40} color={tabInfo.focused ? '#42619b' : '#E1E3DB'}/>
-          )
-        }
-      }
-    },
-    Game: {
-      screen: GameStack,
-      navigationOptions: {
-        tabBarLabel: <Text style={{ fontSize: 15 }}>GAME</Text>,
-        tabBarIcon: (tabInfo) => {
-          return (
-            <MaterialCommunityIcons name="gamepad-square-outline" size={40} color={tabInfo.focused ? '#42619b' : '#E1E3DB'}/>
           )
         }
       }

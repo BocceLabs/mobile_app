@@ -8,7 +8,7 @@ import {AntDesign, Feather, FontAwesome, Ionicons, MaterialCommunityIcons, Mater
 import Animated from "react-native-reanimated";
 
 // part 2 - create a component
-const HomeScreenButton = ( {icon, imageSource, bottomText, onPress}) => {
+const MenuIconButton = ({icon, imageSource, bottomText, onPress}) => {
 
   let [fontsLoaded] = useFonts({
     LuckiestGuy_400Regular,
@@ -87,4 +87,4 @@ const styles = StyleSheet.create({
 });
 
 // part 4 - export the component
-export default HomeScreenButton;
+export default MenuIconButton;

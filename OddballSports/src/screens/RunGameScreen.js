@@ -7,7 +7,7 @@ import TimerScreen from "../components/TimerScreen";
 import Sounds from "../components/Sounds";
 
 // part 2 - create a component
-const RefereeScreen = () => {
+const RunGameScreen = () => {
 
   // frame state
   const [frameResults, setFrameResults] = useState([]);
@@ -66,4 +66,4 @@ const styles = StyleSheet.create({
 });
 
 // part 4 - export the component
-export default RefereeScreen;
+export default RunGameScreen;
