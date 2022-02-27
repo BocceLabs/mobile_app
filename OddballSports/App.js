@@ -4,6 +4,7 @@ import { createAppContainer, createSwitchNavigator, StackActions, NavigationActi
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createStackNavigator, HeaderBackButton } from 'react-navigation-stack';
 import HomeScreen from './src/screens/HomeScreen';
+import HomeScreenABC from "./src/screens/HomeScreenABC";
 import SettingsScreen from './src/screens/SettingsScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
 import RefereeScreen from "./src/screens/RefereeScreen";
@@ -13,18 +14,16 @@ import FindGameScreen from "./src/screens/FindGameScreen";
 import TabBar from './src/components/TabBar';
 import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
 
+
 const HomeStack = createStackNavigator(
   {
-    Home: HomeScreen
+    Home: HomeScreen,
+    ABC: HomeScreenABC
   },
   {
     defaultNavigationOptions: {
       headerStyle: {
         backgroundColor: '#42619b',
-      },
-      headerTitleStyle: {
-        fontFamily: 'LuckiestGuy_400Regular',
-        fontSize: 25
       },
       headerTintColor: '#fff',
       title: 'Home',
@@ -43,7 +42,7 @@ const GameStack = createStackNavigator(
   {
     defaultNavigationOptions: {
       headerStyle: {
-        backgroundColor: '#0091EA',
+        backgroundColor: '#42619b',
       },
       headerTintColor: '#fff',
       title: 'Game',
@@ -75,7 +74,7 @@ const SettingStack = createStackNavigator({
         title: 'Setting',
         headerTintColor: '#fff',
         headerStyle: {
-          backgroundColor: '#0091EA',
+          backgroundColor: '#42619b',
         },
       };
     },
@@ -91,7 +90,7 @@ const ProfileStack = createStackNavigator({
         title: 'Profile',
         headerTintColor: '#fff',
         headerStyle: {
-          backgroundColor: '#0091EA',
+          backgroundColor: '#42619b',
         },
       };
     },
@@ -117,7 +116,7 @@ const App = createBottomTabNavigator(
         tabBarLabel: <Text style={{ fontSize: 15 }}>GAME</Text>,
         tabBarIcon: (tabInfo) => {
           return (
-            <MaterialCommunityIcons name="gamepad-square-outline" size={52} color={tabInfo.focused ? '#42619b' : '#E1E3DB'}/>
+            <MaterialCommunityIcons name="gamepad-square-outline" size={40} color={tabInfo.focused ? '#42619b' : '#E1E3DB'}/>
           )
         }
       }
@@ -169,3 +168,4 @@ const App = createBottomTabNavigator(
 
 
 export default createAppContainer(App);
+

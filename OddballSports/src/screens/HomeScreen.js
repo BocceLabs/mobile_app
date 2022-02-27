@@ -3,6 +3,8 @@ import React, {useState} from 'react';
 import { Text, StyleSheet, View } from 'react-native';
 import Login from '../components/Login';
 import LoggedInHomeScreen from "./LoggedInHomeScreen";
+import {LuckiestGuy_400Regular, useFonts} from "@expo-google-fonts/luckiest-guy";
+import AppLoading from "expo-app-loading";
 
 // part 2 - create a component
 const HomeScreen = () => {

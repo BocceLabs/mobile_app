@@ -1,5 +1,5 @@
 // part 1 - imports
-import React, {useState} from 'react';
+import React from 'react';
 import { Text, StyleSheet, View, Image, TextInput, TouchableOpacity } from 'react-native';
 import {AntDesign} from "@expo/vector-icons";
 import { useFonts, LuckiestGuy_400Regular } from "@expo-google-fonts/luckiest-guy";

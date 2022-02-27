@@ -2,17 +2,22 @@
 import React from 'react';
 import { Text, StyleSheet, View, TouchableOpacity } from 'react-native';
 import HomeScreenButton from "../components/HomeScreenButton";
+import {withNavigation} from "react-navigation";
 
 // part 2 - create a component
-const LoggedInHomeScreen = ( {onLogoutPress} ) => {
+const LoggedInHomeScreen = ( {navigation, onLogoutPress} ) => {
 
   return (
     <View style={styles.buttonContainer}>
-      <HomeScreenButton
-        icon={null}
-        imageSource={require('../../assets/abc.png')}
-        bottomText="American Bocce Co."
-      />
+      <TouchableOpacity
+        onPress={() => navigation.navigate('ABC')}
+      >
+        <HomeScreenButton
+          icon={null}
+          imageSource={require('../../assets/abc.png')}
+          bottomText="American Bocce Co."
+        />
+      </TouchableOpacity>
       <HomeScreenButton
         icon={null}
         imageSource={require('../../assets/Mark-2C-Teal.png')}
@@ -22,16 +27,6 @@ const LoggedInHomeScreen = ( {onLogoutPress} ) => {
         icon={null}
         imageSource={require('../../assets/world-wiffle-ball.png')}
         bottomText="World Wiffle Ball"
-      />
-      <HomeScreenButton
-        icon={{iconType: 'FontAwesome', iconName: 'calendar', iconColor: '#00A1CB'}}
-        imageSource={null}
-        bottomText="Schedule"
-      />
-      <HomeScreenButton
-        icon={{iconType: 'Ionicons', iconName: 'stats-chart-outline', iconColor: '#6754A5'}}
-        imageSource={null}
-        bottomText="Stats"
       />
       <HomeScreenButton
         icon={{iconType: 'MaterialIcons', iconName: 'message', iconColor: '#DB89BA'}}
@@ -61,4 +56,4 @@ const styles = StyleSheet.create({
 });
 
 // part 4 - export the component
-export default LoggedInHomeScreen;
+export default withNavigation(LoggedInHomeScreen);
