@@ -12,26 +12,6 @@ const RefereeMenuScreen = ({ navigation } ) => {
       <Image style={styles.bannerImage} source={require("../../assets/ABCMainTransparent.png")} />
       <View style={styles.buttonContainer}>
         <TouchableOpacity
-          onPress={() => navigation.navigate('NewGame')}
-        >
-          <MenuIconButton
-            icon={{iconType: 'Entypo', iconName: 'new-message', iconColor: 'gray'}}
-            imageSource={null}
-            bottomText="New Game"
-          />
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          onPress={() => navigation.navigate('FindGame')}
-        >
-          <MenuIconButton
-            icon={{iconType: 'MaterialIcons', iconName: 'search', iconColor: 'gray'}}
-            imageSource={null}
-            bottomText="Find Game"
-          />
-        </TouchableOpacity>
-
-        <TouchableOpacity
           onPress={() => navigation.navigate('RunGame')}
         >
           <MenuIconButton
@@ -40,6 +20,26 @@ const RefereeMenuScreen = ({ navigation } ) => {
             bottomText="Run game"
           />
         </TouchableOpacity>
+        <MenuIconButton
+          icon={{iconType: 'MaterialCommunityIcons', iconName: 'scoreboard', iconColor: 'gray'}}
+          imageSource={null}
+          bottomText="Configure Tidbyt Scoreboard"
+        />
+        <MenuIconButton
+          icon={{iconType: 'MaterialCommunityIcons', iconName: 'scoreboard', iconColor: 'gray'}}
+          imageSource={null}
+          bottomText="Configure Command Center Scoreboard"
+        />
+        <MenuIconButton
+          icon={{iconType: 'Entypo', iconName: 'new-message', iconColor: 'gray'}}
+          imageSource={null}
+          bottomText="New Game"
+        />
+        <MenuIconButton
+          icon={{iconType: 'MaterialIcons', iconName: 'search', iconColor: 'gray'}}
+          imageSource={null}
+          bottomText="Find Game"
+        />
       </View>
     </View>
   );
@@ -50,7 +50,8 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    padding: 15
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   bannerImage: {
     width: 300,

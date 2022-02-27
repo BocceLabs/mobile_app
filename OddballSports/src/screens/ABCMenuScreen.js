@@ -10,7 +10,7 @@ import * as WebBrowser from 'expo-web-browser'
 const ABCMenuScreen = ({ navigation } ) => {
 
   return (
-    <View>
+    <View style={styles.container}>
       <Image style={styles.bannerImage} source={require("../../assets/ABCMainTransparent.png")} />
       <View style={styles.buttonContainer}>
         <TouchableOpacity
@@ -55,6 +55,10 @@ const ABCMenuScreen = ({ navigation } ) => {
 
 // part 3 - create stylesheet
 const styles = StyleSheet.create({
+  container: {
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
   bannerImage: {
     width: 300,
     height: 100,
@@ -64,7 +68,8 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    padding: 15
+    justifyContent: 'center',
+    alignItems: 'center'
   },
 });
 

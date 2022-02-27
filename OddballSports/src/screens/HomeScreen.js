@@ -39,7 +39,7 @@ const HomeScreen = () => {
   }
 
   return (
-    <View>
+    <View style={styles.container}>
       {showScreen()}
     </View>
   );
@@ -47,7 +47,10 @@ const HomeScreen = () => {
 
 // part 3 - create stylesheet
 const styles = StyleSheet.create({
-
+  container: {
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
 });
 
 // part 4 - export the component

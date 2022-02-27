@@ -45,7 +45,7 @@ const LoggedInHomeScreen = ( {navigation, onLogoutPress} ) => {
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => openComposer({
-          to: "david@oddballentertainment.com",
+          to: "david@davidrhoffman.net,dav1dmcmanus280@gmail.com",
           subject: "Oddball App Bug Report",
           body: "Hi, can you help me with ...",
         }) }
@@ -74,7 +74,8 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    padding: 15
+    justifyContent: 'center',
+    alignItems: 'center'
   },
 });
 
