@@ -6,8 +6,20 @@ import {
   StyleSheet,
   Text
 } from 'react-native'
+import { useFonts, LuckiestGuy_400Regular } from "@expo-google-fonts/luckiest-guy";
+import AppLoading from 'expo-app-loading';
+
 
 const TabBar = (props) => {
+
+  let [fontsLoaded] = useFonts({
+    LuckiestGuy_400Regular,
+  });
+
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  }
+
   const {
     navigation: {state: {index, routes}},
     getLabelText,
@@ -91,7 +103,8 @@ const styles = StyleSheet.create({
   },
   iconLabel: {
     fontSize: 9,
-    fontWeight: '600'
+    fontWeight: '600',
+    fontFamily: 'LuckiestGuy_400Regular',
   }
 })
 

@@ -20,7 +20,11 @@ const HomeStack = createStackNavigator(
   {
     defaultNavigationOptions: {
       headerStyle: {
-        backgroundColor: '#0091EA',
+        backgroundColor: '#42619b',
+      },
+      headerTitleStyle: {
+        fontFamily: 'LuckiestGuy_400Regular',
+        fontSize: 25
       },
       headerTintColor: '#fff',
       title: 'Home',
